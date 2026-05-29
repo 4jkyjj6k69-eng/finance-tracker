@@ -1,17 +1,17 @@
 const CACHE_NAME = "finance-tracker-v1";
-
-// Alle Dateien die offline verfügbar sein sollen
+ 
 const URLS_TO_CACHE = [
-  "/index.html",
-  "/manifest.json",
-  "/icon-192.png",
-  "/icon-512.png",
+  "/finance-tracker/",
+  "/finance-tracker/index.html",
+  "/finance-tracker/manifest.json",
+  "/finance-tracker/icon-192.png",
+  "/finance-tracker/icon-512.png",
   "https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.development.js",
   "https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.development.js",
   "https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
 ];
-
+ 
 // Installation: alles in den Cache laden
 self.addEventListener("install", event => {
   event.waitUntil(
@@ -22,7 +22,7 @@ self.addEventListener("install", event => {
   );
   self.skipWaiting();
 });
-
+ 
 // Aktivierung: alten Cache löschen
 self.addEventListener("activate", event => {
   event.waitUntil(
@@ -34,7 +34,7 @@ self.addEventListener("activate", event => {
   );
   self.clients.claim();
 });
-
+ 
 // Anfragen: erst Cache, dann Netzwerk
 self.addEventListener("fetch", event => {
   event.respondWith(
@@ -50,9 +50,10 @@ self.addEventListener("fetch", event => {
       }).catch(() => {
         // Offline-Fallback
         if (event.request.destination === "document") {
-          return caches.match("/index.html");
+          return caches.match("/finance-tracker/index.html");
         }
       });
     })
   );
 });
+ 
